@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelance Smart Agreement</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Ethers.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.11.1/ethers.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Freelance Smart Agreement</h1>
+        
+        <!-- Wallet Connection -->
+        <div class="card" id="wallet-section">
+            <button id="connectBtn" class="primary-btn">Connect Wallet</button>
+            <p id="walletAddress">Not Connected</p>
+        </div>
+
+        <!-- Create New Contract Section -->
+        <div class="card">
+            <h2>Create New Agreement</h2>
+            <div class="input-group">
+                <label>Freelancer Address:</label>
+                <input type="text" id="freelancerAddress" placeholder="0x...">
+            </div>
+            <div class="input-group">
+                <label>Agreement Text:</label>
+                <input type="text" id="agreementText" placeholder="e.g. Website Development">
+            </div>
+            <div class="input-group">
+                <label>Payment Amount (ETH):</label>
+                <input type="number" id="paymentAmount" step="0.001" placeholder="0.1">
+            </div>
+            <button id="createContractBtn" class="action-btn">Create Contract</button>
+            <p class="status" id="deployStatus"></p>
+        </div>
+
+        <!-- Interact with Existing Contract -->
+        <div class="card">
+            <h2>Manage Agreement</h2>
+            <div class="input-group">
+                <label>Load Contract Address:</label>
+                <input type="text" id="contractAddress" placeholder="Paste deployed contract address">
+                <button id="loadContractBtn" class="secondary-btn">Load</button>
+            </div>
+            
+            <div id="contractDetails" class="hidden">
+                <p><strong>Status:</strong> <span id="contractStatus">-</span></p>
+                <p><strong>Freelancer:</strong> <span id="displayFreelancer">-</span></p>
+                <p><strong>Amount:</strong> <span id="displayAmount">-</span> ETH</p>
+                
+                <div class="action-buttons">
+                    <button id="confirmWorkBtn" class="success-btn">Confirm Work (Client)</button>
+                    <button id="releasePaymentBtn" class="warning-btn">Release Payment (Client)</button>
+                </div>
+                <p class="status" id="actionStatus"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load ABI and App logic -->
+    <script src="abis.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

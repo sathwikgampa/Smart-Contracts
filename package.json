@@ -1,0 +1,16 @@
+{
+  "name": "freelance-smart-agreement",
+  "version": "1.0.0",
+  "description": "Freelance Smart Agreement on Ethereum",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "solc": "^0.8.33"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0"
+  }
+}

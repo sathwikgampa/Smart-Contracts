@@ -1,0 +1,130 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 600px;
+    max-width: 100%;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #444;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #555;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    font-size: 14px;
+}
+
+/* Button Styles */
+button {
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    transition: opacity 0.2s;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.primary-btn {
+    background-color: #3b82f6;
+    color: white;
+    width: 100%;
+}
+
+.action-btn {
+    background-color: #10b981;
+    color: white;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.secondary-btn {
+    background-color: #6b7280;
+    color: white;
+    margin-top: 5px;
+    width: auto;
+}
+
+.success-btn {
+    background-color: #10b981;
+    color: white;
+}
+
+.warning-btn {
+    background-color: #f59e0b;
+    color: white;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.action-buttons button {
+    flex: 1;
+}
+
+.status {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #666;
+    font-style: italic;
+    word-break: break-all;
+}
+
+.hidden {
+    display: none;
+}
+
+#walletAddress {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #3b82f6;
+}
