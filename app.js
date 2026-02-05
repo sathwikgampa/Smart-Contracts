@@ -49,6 +49,7 @@ createContractBtn.addEventListener('click', async () => {
     const paymentEth = document.getElementById('paymentAmount').value;
 
     if (!freelancerAddr || !agreementText || !paymentEth) return alert("Please fill all fields");
+    if (!ethers.isAddress(freelancerAddr)) return alert("Invalid Freelancer Address");
 
     deployStatus.innerText = "Deploying... Please confirm in MetaMask.";
 
@@ -102,11 +103,58 @@ async function refreshContractDetails() {
     try {
         const details = await agreementContract.getDetails();
         // details = [client, freelancer, text, amount, status]
+        const clientAddr = details[0];
+        const freelancerAddr = details[1];
 
         const statusIdx = Number(details[4]); // Convert bigint to number if needed
-        document.getElementById('displayFreelancer').innerText = details[1];
+        document.getElementById('displayFreelancer').innerText = freelancerAddr;
         document.getElementById('displayAmount').innerText = ethers.formatEther(details[3]);
         document.getElementById('contractStatus').innerText = statusMap[statusIdx];
+
+        // Check Role
+        if (signer) {
+            const userAddress = await signer.getAddress();
+            const actionContainer = document.querySelector('.action-buttons');
+            const roleInfo = document.getElementById('roleInfo'); // We will add this element
+
+            if (!roleInfo) {
+                // Create if not exists
+                const p = document.createElement('p');
+                p.id = 'roleInfo';
+                p.style.fontWeight = 'bold';
+                p.style.marginTop = '10px';
+                document.getElementById('contractDetails').insertBefore(p, actionContainer);
+            }
+
+            const roleDisplay = document.getElementById('roleInfo');
+            const confirmBtn = document.getElementById('confirmWorkBtn');
+            const releaseBtn = document.getElementById('releasePaymentBtn');
+
+            if (userAddress.toLowerCase() === clientAddr.toLowerCase()) {
+                roleDisplay.innerText = "You are the Client";
+                roleDisplay.style.color = "green";
+                confirmBtn.disabled = false;
+                releaseBtn.disabled = false;
+                confirmBtn.style.opacity = "1";
+                releaseBtn.style.opacity = "1";
+            } else if (userAddress.toLowerCase() === freelancerAddr.toLowerCase()) {
+                roleDisplay.innerText = "You are the Freelancer";
+                roleDisplay.style.color = "blue";
+                confirmBtn.disabled = true;
+                releaseBtn.disabled = true;
+                confirmBtn.style.opacity = "0.5";
+                releaseBtn.style.opacity = "0.5";
+                confirmBtn.title = "Only Client can confirm work";
+                releaseBtn.title = "Only Client can release payment";
+            } else {
+                roleDisplay.innerText = "You are an Observer";
+                roleDisplay.style.color = "gray";
+                confirmBtn.disabled = true;
+                releaseBtn.disabled = true;
+                confirmBtn.style.opacity = "0.5";
+                releaseBtn.style.opacity = "0.5";
+            }
+        }
     } catch (error) {
         console.error("Error fetching details:", error);
     }

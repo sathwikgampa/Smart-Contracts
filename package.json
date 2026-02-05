@@ -4,7 +4,8 @@
   "description": "Freelance Smart Agreement on Ethereum",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "compile": "node compile.js",
+    "build": "node compile.js && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
