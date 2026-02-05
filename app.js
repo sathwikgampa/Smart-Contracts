@@ -14,25 +14,47 @@ const contractDetails = document.getElementById('contractDetails');
 const actionStatus = document.getElementById('actionStatus');
 
 // Wallet Connection
-connectBtn.addEventListener('click', async () => {
-    if (window.ethereum) {
-        try {
-            provider = new ethers.BrowserProvider(window.ethereum);
-            await provider.send("eth_requestAccounts", []);
-            signer = await provider.getSigner();
-            const address = await signer.getAddress();
+if (connectBtn) {
+    connectBtn.addEventListener('click', async () => {
+        console.log("Connect button clicked");
+        if (typeof window.ethereum !== 'undefined') {
+            try {
+                connectBtn.innerText = "Connecting...";
+                connectBtn.disabled = true;
 
-            walletAddressDisplay.innerText = `Connected: ${address.substring(0, 6)}...${address.substring(38)}`;
-            connectBtn.innerText = "Wallet Connected";
-            connectBtn.disabled = true;
-        } catch (error) {
-            console.error(error);
-            alert("Failed to connect wallet: " + (error.message || error));
+                provider = new ethers.BrowserProvider(window.ethereum);
+                const accounts = await provider.send("eth_requestAccounts", []);
+
+                if (accounts.length === 0) throw new Error("No accounts found");
+
+                signer = await provider.getSigner();
+                const address = await signer.getAddress();
+
+                console.log("Connected to:", address);
+                walletAddressDisplay.innerText = `Connected: ${address.substring(0, 6)}...${address.substring(38)}`;
+                connectBtn.innerText = "Wallet Connected";
+                connectBtn.classList.remove('primary-btn');
+                connectBtn.classList.add('success-btn'); // optional visual change
+
+                // Trigger detail refresh if address is loaded
+                if (contractAddressInput.value) {
+                    loadContractBtn.click();
+                }
+
+            } catch (error) {
+                console.error("Connection Error:", error);
+                alert("Connection Failed: " + (error.message || error));
+                connectBtn.innerText = "Connect Wallet";
+                connectBtn.disabled = false;
+            }
+        } else {
+            alert("MetaMask is not installed. Please install it to use this app.");
+            window.open('https://metamask.io/download/', '_blank');
         }
-    } else {
-        alert("Please install MetaMask!");
-    }
-});
+    });
+} else {
+    console.error("Connect Button not found in DOM");
+}
 
 // Create Contract
 createContractBtn.addEventListener('click', async () => {
