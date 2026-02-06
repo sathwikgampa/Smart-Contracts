@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,10 +9,11 @@
     <!-- Ethers.js from CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.11.1/ethers.umd.min.js"></script>
 </head>
+
 <body>
     <div class="container">
         <h1>Freelance Smart Agreement</h1>
-        
+
         <!-- Wallet Connection -->
         <div class="card" id="wallet-section">
             <button id="connectBtn" class="primary-btn">Connect Wallet</button>
@@ -45,12 +47,12 @@
                 <input type="text" id="contractAddress" placeholder="Paste deployed contract address">
                 <button id="loadContractBtn" class="secondary-btn">Load</button>
             </div>
-            
+
             <div id="contractDetails" class="hidden">
                 <p><strong>Status:</strong> <span id="contractStatus">-</span></p>
                 <p><strong>Freelancer:</strong> <span id="displayFreelancer">-</span></p>
                 <p><strong>Amount:</strong> <span id="displayAmount">-</span> ETH</p>
-                
+
                 <div class="action-buttons">
                     <button id="confirmWorkBtn" class="success-btn">Confirm Work (Client)</button>
                     <button id="releasePaymentBtn" class="warning-btn">Release Payment (Client)</button>
@@ -61,7 +63,8 @@
     </div>
 
     <!-- Load ABI and App logic -->
-    <script src="abis.js"></script>
-    <script src="app.js"></script>
+    <!-- App logic -->
+    <script type="module" src="app.js"></script>
 </body>
+
 </html>

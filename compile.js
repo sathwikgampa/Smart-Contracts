@@ -38,10 +38,10 @@ const contract = output.contracts['Agreement.sol']['Agreement'];
 const abi = contract.abi;
 const bytecode = contract.evm.bytecode.object;
 
-const jsContent = `const AGREEMENT_ABI = ${JSON.stringify(abi, null, 2)};
+const jsContent = `export const AGREEMENT_ABI = ${JSON.stringify(abi, null, 2)};
 
 // Bytecode generated automatically by compile.js
-const AGREEMENT_BYTECODE = "0x${bytecode}";
+export const AGREEMENT_BYTECODE = "0x${bytecode}";
 `;
 
 fs.writeFileSync(path.resolve(__dirname, 'abis.js'), jsContent);
